@@ -1,0 +1,8 @@
+assetic:
+    bundles:
+        - EzPlatformPageBuilderEnhancedCodeBlockBundle
+
+ezplatform_page_fieldtype:
+    blocks:
+        tag:
+            configuration_template: 'EzPlatformPageBuilderEnhancedCodeBlockBundle:page_builder:block/config/code.html.twig'

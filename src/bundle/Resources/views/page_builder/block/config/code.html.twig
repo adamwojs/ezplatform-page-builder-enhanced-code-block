@@ -1,0 +1,46 @@
+{% extends '@EzPlatformPageBuilder/page_builder/block/config/code.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets '@EzPlatformPageBuilderEnhancedCodeBlockBundle/Resources/public/css/config-form/code.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block _block_configuration_attributes_content_widget %}
+    {{ form_row(form.id, {'label': false, 'attr': {'hidden': true}}) }}
+    {{ form_row(form.name, {'label': false, 'attr': {'hidden': true}}) }}
+
+    {{ form_label(form.value, form.vars.label) }}
+    {{ form_errors(form.value)}}
+
+    <div class="ez-ace-editor-container">
+        {{ form_widget(form.value, {'attr': {'hidden': true}}) }}
+
+        <div id="{{ form.vars.id }}__editor" class="ez-ace-editor"></div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    {% set form_templates = [
+        _self, '@EzPlatformPageBuilder/page_builder/block/form_fields.html.twig'
+    ] %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ext-language_tools.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/theme-chrome.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/mode-html.js"></script>
+    {%  javascripts
+        '@EzPlatformPageBuilderEnhancedCodeBlockBundle/Resources/public/js/config-form/code.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
